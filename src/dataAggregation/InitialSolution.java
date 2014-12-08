@@ -12,17 +12,22 @@ class TreeNode{
 	int timeTide;
 }
 public class InitialSolution {
-	 public InitialSolution(VNode[] V){
+	int nodenum;
+	 InitialSolution(VNode[] V){
 /*		VNode[] VN = new VNode[V.length];
 		VN=V; 							//shallow clone
 */
+		 nodenum = V.length;
 		 TreeNode root = new TreeNode();
 		 root.data = 0;
 		 root.parent = 0;
 		 root.timeTide = 1;
+		 root.children = null;
 	}
-	 VNode[] optionalSet = new VNode[5];
-	 public ResultTree[] solve(){
-		 
+
+	 public TreeNode[] ResultTree(){
+		 System.out.println(nodenum);
+		 TreeNode[] tn = new TreeNode[nodenum];
+		 return tn;
 	 }
 }
