@@ -32,7 +32,7 @@ public class DrawGraph {
 	public int edgeNum;
 	public VNode[] DrawG()throws FileNotFoundException{
 		
-		Scanner sc1 = new Scanner(new File("E:/test.txt"));   //from 0 to n
+		Scanner sc1 = new Scanner(new File("C:/test.txt"));   //from 0 to n
 		nodeNum=sc1.nextInt();
 		edgeNum = sc1.nextInt();
 		

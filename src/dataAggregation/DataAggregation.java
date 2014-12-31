@@ -15,7 +15,7 @@ public class DataAggregation {
 		list=is.ResultTree();
 		for(int i=0;i<list.size();i++)
 		{
-			System.out.println(list.get(i).from+" "+list.get(i).father+" "+list.get(i).round);
+			System.out.println("node "+list.get(i).from+"  father "+list.get(i).father+" round "+list.get(i).round);
 		}
 	}
 }

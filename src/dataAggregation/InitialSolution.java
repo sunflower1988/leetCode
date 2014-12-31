@@ -17,7 +17,6 @@ public class InitialSolution {
 	List<Integer> zr = new ArrayList<Integer>();
 	List<Integer> father = new ArrayList<Integer>();
 	List<VNode> selected = new ArrayList<VNode>();
-	List<VNode> selectedfa = new ArrayList<VNode>();
 	List<Integer> temp = new ArrayList<Integer>();
 	List<Integer> trtemp = new ArrayList<Integer>();
 	 InitialSolution(VNode[] V){
@@ -25,37 +24,38 @@ public class InitialSolution {
 		nodenum = V.length;
 		Vn = new VNode[nodenum];
 		Vn=V; 							//shallow clone
-		for(int i=0;i<nodenum;i++){     //deep clone?
-			Vn[i]=V[i];
-		}
 	}
 
 	 public List<VNode> ResultTree(){
 		 tr.add(Vn[0]);
 		 tr.get(0).round=timeTides;
 		 //option collection
-		 while(tr.size()!=nodenum){//²éÑ¯ËùÓĞtr½áµãµÄÒ¶×Ó½áµã
+		 while(tr.size()!=nodenum){//æŸ¥è¯¢æ‰€æœ‰trç»“ç‚¹çš„å¶å­ç»“ç‚¹
 			 timeTides++;
 			 zr.clear();
-			 for(int i=0;i<tr.size();i++){                 //²éÑ¯ÏÖÓĞtrÖĞ½áµãµÄËùÓĞÒ¶×Ó½áµã
+			 for(int i=0;i<tr.size();i++){                 //æŸ¥è¯¢ç°æœ‰trä¸­ç»“ç‚¹çš„æ‰€æœ‰å¶å­ç»“ç‚¹
 				 	tempV = tr.get(i).first;
-					for(int m = tr.get(i).degreeNum-1;m>=0;m--) //½«vnµÄ±ß½áµã·ÅÈëzr
+				 	trtemp.clear();
+				 	 for(int k=0;k<tr.size();k++){
+						 trtemp.add(tr.get(k).from);
+					 }
+					while(tempV!=null) //å°†vnçš„è¾¹ç»“ç‚¹æ”¾å…¥zr
 							 {
-								 zr.add(tempV.to);
+								 if(!trtemp.contains(tempV.to))zr.add(tempV.to);
 								 tempV = tempV.next;
 							 }
-						 Set<Integer> tempSet = new HashSet<Integer>(); //zrÈ¥ÖØ
+						 Set<Integer> tempSet = new HashSet<Integer>(); //zrå»é‡
 						 tempSet.addAll(zr);
 						 zr.clear();
 						 zr.addAll(tempSet);
-						 if(zr.containsAll(tr))zr.removeAll(tr); //É¾³ızrÖĞÓëtrÖĞÔªËØÏàÍ¬µÄÔªËØ
+						 if(zr.containsAll(tr))zr.removeAll(tr); //åˆ é™¤zrä¸­ä¸trä¸­å…ƒç´ ç›¸åŒçš„å…ƒç´ 
 				 }
 			 
 			 father.clear();
 			 selected.clear();
 			 int z=-1;
 			 while(zr.size()!=0){
-				 //Ëæ»úÑ¡Ôñz   
+				 //éšæœºé€‰æ‹©z    
 				 int[] array = new int[zr.size()];
 				 for(int t =0;t<zr.size();t++){
 					 array[t]=zr.get(t);
@@ -64,42 +64,26 @@ public class InitialSolution {
 				 int nn=(int)(Math.random()*(n-0)+0);
 				 z=array[nn];
 				 
-				 //²éÕÒselectedÖĞµÄÖµ
+				 //æŸ¥æ‰¾selectedä¸­çš„å€¼
 				 temp.clear();
 				 for(int p=0;p<selected.size();p++){
 					 temp.add(selected.get(p).from);
-				 }
-				 
-/*				 while(temp!=null&&temp.contains(z)){
-					 z=array[((int)(Math.random()*(n-0)+0))];
-				 }*/
-				 
+				 }				 
 				 Unduplication ud = new Unduplication(z,tr,selected,Vn);
-				 System.out.print("Ëæ»úzÖµ"+z+"   ");
+				 System.out.print("é€‰æ‹©"+z+"   ");
 				 if(!ud.selection()){
-					 //Ñ¡È¡zÔÚtrÖĞµÄ¸¸½Úµã
+					 //é€‰å–zåœ¨trä¸­çš„çˆ¶èŠ‚ç‚¹
 					 tempV=null;
-					 
+					 trtemp.clear();
 					 for(int k=0;k<tr.size();k++){
 						 trtemp.add(tr.get(k).from);
 					 }
 					 tempV = Vn[z].first;
-					while(tempV!=null){
+					 father.clear();
+					 while(tempV!=null){
 						 if(trtemp.contains(tempV.to)) father.add(tempV.to);
 						 tempV = tempV.next;
 					 }
-					 //È¥³ıÓëselected¸¸½ÚµãÏàÍ¬µÄ¸¸½Úµã
-					 tempV=null;
-					 selectedfa.clear();
-					 if(selected.size()!=0)tempV=selected.get(0).first;
-						 while(tempV!=null){
-							selectedfa.add(Vn[tempV.to]);
-							tempV=tempV.next;
-					 }
-					 father.removeAll(selectedfa);
-					 //Ñ¡È¡zÔÚtrÖĞµÄ¸¸½Úµã
-					 if(father.size()!=0){
-	
 						 int[] arrayfa = new int[father.size()];
 						 n=father.size();
 						 for(int t=0;t<father.size();t++){
@@ -108,9 +92,8 @@ public class InitialSolution {
 						 Vn[z].father= arrayfa[(int)(Math.random()*(n-0)+0)];
 						
 						 selected.add(Vn[z]);
-						 System.out.println("selectedÔö¼Ó"+Vn[z].from+" ");
-						 Vn[z].round=timeTides;  //±ê¼ÇÊ±¼ä³±
-					 }
+						 System.out.println("selectedæ·»åŠ "+Vn[z].from+" ");
+						 Vn[z].round=timeTides;  //æ ‡è®°æ—¶é—´æ½®
 				 }
 				 if(!zr.isEmpty())zr.remove(nn);
 				 else break;

@@ -1,5 +1,8 @@
 package dataAggregation;
-
+/*
+ * 冲突判断：
+ * 若Z节点可到达已选节点的任意父节点，则该节点不能被选择，返回冲突
+ */
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,29 +27,26 @@ public class Unduplication {
 		}
 		e =  v[z].first;
 		while(e!=null){
-			if(temp.contains(zfathers))zfathers.add(e.to);
+			if(temp.contains(e.to))zfathers.add(e.to);
 			e=e.next;	
 		}
-//		if(zfathers.containsAll(selected))return true;
-		//����ѡ���ĸ��ڵ㼯�޸��ŵ�z�ĸ��ڵ㼯��zfathers
+		//z在tr中可选的father放入zfathers中
 		if(!selected.isEmpty())
 		{
-			e=selected.get(0).first;
-			while(e!=null){
-				selectedfa.add(e.to);
-				e=e.next;
+			for(int i=0;i<selected.size();i++){
+				e=selected.get(i).first;
+				while(e!=null){
+					if(temp.contains(e.to))selectedfa.add(e.to);
+					e=e.next;
 				}
-		
-		if(zfathers.contains(selectedfa)){
-			zfathers.removeAll(selectedfa);
-			if(zfathers.size()!=0)
-				return false;
-			else return true;
+			}
+			//若Z节点可到达selected的任意父节点，则该节点不能被选择
+			for(int i=0;i<selectedfa.size();i++){
+				if(zfathers.contains(selectedfa.get(i)))
+					return true;
+			}
 		}
-		}
-		//z�ĸ��ڵ�����ѡ���޸���
+        //false为不冲突
 		return false;
-		
-		
 	}
 }

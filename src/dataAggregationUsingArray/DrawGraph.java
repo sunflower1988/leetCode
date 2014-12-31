@@ -8,7 +8,6 @@ class Vertex{
 	int[] vertexSet = new int[2];
 }
 public class DrawGraph {
-	int[] vertexSet = new int[2];
 	int nodeNum,edgeNum;
 	Vertex[] v;
 	public Vertex[] drawGraph() throws FileNotFoundException{
@@ -20,6 +19,12 @@ public class DrawGraph {
 			v[i].vertexSet[0]=sc.nextInt();
 			v[i].vertexSet[1]=sc.nextInt();
 		}
+		System.out.println("("+v);
 		return v;
+	} 
+	public static void main(String[] args) throws FileNotFoundException{
+		DrawGraph d = new DrawGraph();
+		Vertex[] vv = d.drawGraph();
+		System.out.print(vv);
 	}
 }
