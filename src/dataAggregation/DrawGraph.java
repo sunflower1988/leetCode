@@ -8,19 +8,22 @@ class VNode{
 	int from;        
 	Edge first;         //first edge  
 	int degreeNum;      
-	boolean visit;
+	int father;
+	int round;
 	public VNode(int from){
 		this.from = from;
-		visit = false;
+		father = 0;
 		first = null;
+		round =0;
 	}
 }
 class Edge{
 	int to;
-	Edge next;          //next edge
+	Edge next;  //next edge
 	public Edge(int to){
 		this.to = to;
 		next = null;
+		
 	}
 }
 
@@ -29,7 +32,7 @@ public class DrawGraph {
 	public int edgeNum;
 	public VNode[] DrawG()throws FileNotFoundException{
 		
-		Scanner sc1 = new Scanner(new File("C:/Users/i312902/Private/algorithm/test.txt"));   //from 0 to n
+		Scanner sc1 = new Scanner(new File("E:/test.txt"));   //from 0 to n
 		nodeNum=sc1.nextInt();
 		edgeNum = sc1.nextInt();
 		
@@ -47,8 +50,8 @@ public class DrawGraph {
 		for(int i=0;i<edgeNum;i++){
 			u = sc1.nextInt();          //from 0 to n
 			v = sc1.nextInt();	
-//			System.out.println("from"+u+"to"+v);
-			e = new Edge(v);
+			System.out.println("from "+u+" to "+v);
+			e = new Edge(v);            //head insert
 			e.next = V[u].first;               
 			V[u].first = e;
 			V[u].degreeNum++;                  
@@ -58,6 +61,7 @@ public class DrawGraph {
 	        V[v].first=eContra;
 	        V[v].degreeNum++;
 	        }
+		sc1.close();
 		return V;
 	}
 }
