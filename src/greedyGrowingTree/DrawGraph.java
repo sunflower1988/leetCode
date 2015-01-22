@@ -5,30 +5,21 @@ import java.io.*;
 
 //class VNode implements Cloneable,Serializable{
 class VNode{
-	char from;        
+	int from;        
 	Edge first;         //fromå�Žè¿žæŽ¥çš„first edge
 	int degreeNum;      
 	boolean visit;
-/*	protected VNode clone(){  
-        VNode cloned = null;  
-        try {  
-            cloned = (VNode) super.clone();  
-        } catch (CloneNotSupportedException e) {  
- 
-            e.printStackTrace();  
-        }  
-        return cloned;  
-    }  */
-	public VNode(char from){
+
+	public VNode(int from){
 		this.from = from;
 		visit = false;
 		first = null;
 	}
 }
 class Edge{
-	char to;
+	int to;
 	Edge next;          //next edge
-	public Edge(char to){
+	public Edge(int to){
 		this.to = to;
 		next = null;
 	}
@@ -39,7 +30,7 @@ class Draw{
 	public int edgeNum;
 	
 	public VNode[] DrawG()throws FileNotFoundException{
-	Scanner sc1 = new Scanner(new File("E:/aa.txt")); 
+	Scanner sc1 = new Scanner(new File("C:/test.txt")); 
 	nodeNum=sc1.nextInt();
 	
 	edgeNum = sc1.nextInt();
@@ -61,25 +52,25 @@ class Draw{
 	Edge e = null;                       
 	Edge eContra = null;			     
 	
-	char u = 'A';
-	char v = 'A';
+	int u;
+	int v;
 //	System.out.println("the first one must be the Sink node");
 	for(int i=0;i<edgeNum;i++){
 	//	System.out.println("from...to...");
-		u = sc1.next("[A-Z]").charAt(0);         
-		v = sc1.next("[A-z]").charAt(0);		
+		u = sc1.nextInt();         
+		v = sc1.nextInt();		
 		
 		
 		e = new Edge(v);
-		e.next = V[u-'A'].first;               
-		V[u-'A'].first = e;
-		V[u-'A'].degreeNum++;                  
+		e.next = V[u].first;               
+		V[u].first = e;
+		V[u].degreeNum++;                  
 		
 		//å¯¹ç§°è¾¹
 		eContra=new Edge(u);                     
-		eContra.next=V[v-'A'].first; 			
-        V[v-'A'].first=eContra;
-        V[v-'A'].degreeNum++;
+		eContra.next=V[v].first; 			
+        V[v].first=eContra;
+        V[v].degreeNum++;
         }
 /*		for(int i=0;i<nodeNum;i++){		
 			System.out.println("èŠ‚ç‚¹i"+V[i].from+"åº¦ä¸º"+V[i].degreeNum);		

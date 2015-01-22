@@ -2,14 +2,14 @@ package greedyGrowingTree;
 import java.util.*;
 import java.lang.Math;
 public class SortZr {
-	private List<Map.Entry<Character,Integer>> ArNode; 
-	private List<Map.Entry<Character,Integer>> PiNode;		 
-	private List<Map.Entry<Character,Integer>> CriNode;	 
-	private List<Character> NormalNode;
+	private List<Map.Entry<Integer,Integer>> ArNode; 
+	private List<Map.Entry<Integer,Integer>> PiNode;		 
+	private List<Map.Entry<Integer,Integer>> CriNode;	 
+	private List<Integer> NormalNode;
 	private List<Integer> list;
 	private VNode[] v1,v2,v3;
-	private List<Character> Ztemp=new ArrayList<Character>();
-	public List<Character> ISortZr(VNode[] v,List<Character> Tr,List<Character> Zr)throws Exception{
+	private List<Integer> Ztemp=new ArrayList<Integer>();
+	public List<Integer> ISortZr(VNode[] v,List<Integer> Tr,List<Integer> Zr)throws Exception{
 		//TEST
 		System.out.print("Trï¼š");
 		for(int i=0;i<Tr.size();i++){
@@ -37,7 +37,7 @@ public class SortZr {
 		}*/
 	
 		v1=v;
-		List<Character> zr = new ArrayList<Character>();
+		List<Integer> zr = new ArrayList<Integer>();
 		zr=Zr;
 		list = new ArrayList<Integer>();
 		BFS bfs = new BFS(v);

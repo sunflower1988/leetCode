@@ -5,7 +5,7 @@ class GGT{
 	private VNode[] V,v,vn;
 	public int r =1;
 	public int Edgenum,Nodenum;
-	public List<Character> SortResult = new ArrayList<Character>() ;
+	public List<Integer> SortResult = new ArrayList<Integer>() ;
 
 	public GGT()throws Exception{						//å»ºå›¾
 		Draw G = new Draw();
@@ -21,22 +21,17 @@ class GGT{
 		}
 	
 	public void ControlGGT()throws Exception{
-		List<Character> Tr = new ArrayList<Character>();
+/*		List<Character> Tr = new ArrayList<Character>();
 		List<Character> Zr = new ArrayList<Character>();
 		List<Character> Sr = new ArrayList<Character>();
-		List<Character> Dr = new  ArrayList<Character>();
-/*		System.out.println("The Link from GreedyGrowingTree:");
-		VNode[] vvv=V;
-		for(int i=0;i<vvv.length;i++){
-			System.out.print(vvv[i].from+" ");
-			while(vvv[i].first!=null){
-				System.out.print(vvv[i].first.to+" ");
-				vvv[i].first=vvv[i].first.next;
-			}
-			System.out.println();	
-		}*/
+		List<Character> Dr = new  ArrayList<Character>();*/
+		List<Integer> Tr = new ArrayList<Integer>();
+		List<Integer> Zr = new ArrayList<Integer>();
+		List<Integer> Sr = new ArrayList<Integer>();
+		List<Integer> Dr = new  ArrayList<Integer>();
+
 		Tr.add(vn[0].from); //Tr[0]å¿…é¡»ä¸ºæ ¹èŠ‚ç‚¹
-//		System.out.println(Tr.get(0));
+
 		int k=0;
 		while(Tr.size()!=Nodenum){	
 			Draw G = new Draw();
@@ -61,13 +56,7 @@ class GGT{
 					k++;
 				}
 			}
-//			System.out.print("Zr:");
-//			System.out.print(" "+Zr.size());
-/*			for(int i=0;i<Zr.size();i++){
-				System.out.print(Zr.get(i));
-			}
-			System.out.println();
-*/
+
 			//åŽ»é‡�
 			NoDuplicates noDu = new NoDuplicates();
 			Zr=noDu.INoDuplicate(Zr);
@@ -83,9 +72,9 @@ class GGT{
 			System.out.println();
 			
 			int p=0;
-			char z;
-			List<Character> Neibor = new ArrayList<Character>();
-			List<Character> D = new ArrayList<Character>();
+			int z;
+			List<Integer> Neibor = new ArrayList<Integer>();
+			List<Integer> D = new ArrayList<Integer>();
 			//é€‰æ‹©Zrä¸­çš„èŠ‚ç‚¹æ”¾å…¥Træˆ–Srã€�Drä¸­
 			while(Sr.size()!=SortResult.size()&&p<SortResult.size()){
 				if(!Sr.contains(SortResult.get(p))){ //SortResultä¸­èŠ‚ç‚¹ä¸�åœ¨Srä¸­ node in Zr/Sr
@@ -139,7 +128,7 @@ class GGT{
 	}
 	
 	//ï¿½ï¿½ï¿½ï¿½Neiborï¿½ï¿½dï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Zrï¿½ï¿½ï¿½Ú¾Ó½Úµï¿½ï¿½ï¿½ï¿½Ä½Úµï¿½
-	public List<Character> NeighborNum(List<Character> Neibor,List<Character> Zr) throws Exception{
+	public List<Integer> NeighborNum(List<Integer> Neibor,List<Integer> Zr) throws Exception{
 		int num=0;
 		Draw GG = new Draw();
 		VNode[] vv= GG.DrawG();
@@ -164,7 +153,7 @@ class GGT{
 		}
 		//æ ¹æ�®Neiborçš„Neibornumå¯¹NeiboræŽ’åº�    //ä»Žå°�åˆ°å¤§
 		int p=0,q=0;
-		char tmp;
+		int tmp;
 		for(p=neiNum.length-1;p>0;--p){
 			for(q=0;q<p;++q){
 				if(neiNum[q+1]<neiNum[q]){
@@ -178,22 +167,9 @@ class GGT{
 	}
 	
 	//zåœ¨Trä¸­çš„neibor
-	public List<Character> Neighbor(VNode[] vv,char z,List<Character> Tr) throws Exception{
-		List<Character> Neibor = new ArrayList<Character>();
-		//heap OutOfMemory
-	/* int i=0; 
-		for(i=0;i<Nodenum;i++){
-			if(vv[i].from==z)break;
-		}
-		Edge e =  vv[i].first;
-		while(e!=null)
-		{
-			if(Tr.contains(e.to)){
-				Neibor.add(e.to);
-			}
-			else
-				e=e.next;
-		}*/
+	public List<Integer> Neighbor(VNode[] vv,int z,List<Integer> Tr) throws Exception{
+		List<Integer> Neibor = new ArrayList<Integer>();
+		
 		for(int i=0;i<Nodenum;i++){
 			if(z==vv[i].from){	
 				Edge e=vv[i].first;

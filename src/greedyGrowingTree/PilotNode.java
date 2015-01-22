@@ -11,13 +11,13 @@ import java.util.*;
 //ä»…åœ¨Zrä¸­åˆ¤æ–­
 public class PilotNode {
 	private VNode[] vn;
-	private char node;
+	private int node;
 	private int layer;
-	Map<Character,Integer> Pilot = new HashMap<Character,Integer>();
-	Map<Character,Integer> result = new HashMap<Character,Integer>();
+	Map<Integer,Integer> Pilot = new HashMap<Integer,Integer>();
+	Map<Integer,Integer> result = new HashMap<Integer,Integer>();
 	int vnodeLen=0;
-	public List<Map.Entry<Character,Integer>> IPilotNode(VNode[] v,List<Integer> list,
-			List<Character> Zr,List<Map.Entry<Character,Integer>> ArNode) throws Exception{
+	public List<Map.Entry<Integer,Integer>> IPilotNode(VNode[] v,List<Integer> list,
+			List<Integer> Zr,List<Map.Entry<Integer,Integer>> ArNode) throws Exception{
 /*		System.out.println("The Link from PilotNode:");
 		VNode[] vv=v;
 		for(int i=0;i<vv.length;i++){
@@ -89,27 +89,27 @@ public class PilotNode {
 		
 		}
 		//ä¿�ç•™æ—¢åœ¨resultä¸­çš„èŠ‚ç‚¹å�ˆåœ¨Zrä¸­çš„èŠ‚ç‚¹
-		Set<Map.Entry<Character, Integer>> resultEntry = result.entrySet();  //mapçš„entrySetæ–¹æ³•
-		for(Map.Entry<Character, Integer> rentry:resultEntry){
+		Set<Map.Entry<Integer, Integer>> resultEntry = result.entrySet();  //mapçš„entrySetæ–¹æ³•
+		for(Map.Entry<Integer, Integer> rentry:resultEntry){
 			for(int j=0;j<Zr.size();j++){
 				if(rentry.getKey()==Zr.get(j))
 					Pilot.put(rentry.getKey(),rentry.getValue());
 			}
 		}
 		//åŽ»é™¤Pilotä¸­åœ¨ArticulationNodeä¸­çš„èŠ‚ç‚¹
-		Set<Map.Entry<Character, Integer>> resultEntry2 = Pilot.entrySet();
-		for(Map.Entry<Character, Integer> rentry1:resultEntry2){
+		Set<Map.Entry<Integer, Integer>> resultEntry2 = Pilot.entrySet();
+		for(Map.Entry<Integer, Integer> rentry1:resultEntry2){
 			for(int j=0;j<ArNode.size();j++){
 				if(rentry1.getKey()==ArNode.get(j).getKey())Pilot.remove(rentry1.getKey());
 			}
 		}
 		//hashmapæ— æ³•æ·»åŠ ç›¸å�Œçš„key,å¦‚æžœkeyç›¸å�Œåˆ™è¦†ç›–ä¹‹å‰�çš„key value.
 		//æŒ‰valueæŽ’åº�.
-		List<Map.Entry<Character,Integer>> resultNodes= 
-			new ArrayList<Map.Entry<Character,Integer>>(Pilot.entrySet()); 
+		List<Map.Entry<Integer,Integer>> resultNodes= 
+			new ArrayList<Map.Entry<Integer,Integer>>(Pilot.entrySet()); 
 		
-		Collections.sort(resultNodes, new Comparator<Map.Entry<Character, Integer>>() {   
-		    public int compare(Map.Entry<Character, Integer> o1, Map.Entry<Character, Integer> o2) {      
+		Collections.sort(resultNodes, new Comparator<Map.Entry<Integer, Integer>>() {   
+		    public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {      
 		        //return (o2.getValue() - o1.getValue()); 
 		        return (o1.getValue().compareTo(o2.getValue()));
 		    }

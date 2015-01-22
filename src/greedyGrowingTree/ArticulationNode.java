@@ -11,9 +11,9 @@ public class ArticulationNode {
 		private VNode[] V;
 		private int cnt; //cntæŽ§åˆ¶åº�å�·é€’å¢ž
 		int[] ord,low;
-		Map<Character,Integer> result = new HashMap<Character,Integer>();
-		Map<Character,Integer> tempResult = new HashMap<Character,Integer>();
-		Map<Character,Integer> Articulation = new HashMap<Character,Integer>();
+		Map<Integer,Integer> result = new HashMap<Integer,Integer>();
+		Map<Integer,Integer> tempResult = new HashMap<Integer,Integer>();
+		Map<Integer,Integer> Articulation = new HashMap<Integer,Integer>();
 		
 		ArticulationNode(VNode[] v){
 			V = v;
@@ -24,21 +24,12 @@ public class ArticulationNode {
 					ord[i] = -1;
 					low[i] = -1;
 				}
-/*			System.out.println("The Link from ArticulationNode:");
-			VNode[] vv=v;
-			for(int i=0;i<vv.length;i++){
-				System.out.print(vv[i].from+" ");
-				while(vv[i].first!=null){
-					System.out.print(vv[i].first.to+" ");
-					vv[i].first=vv[i].first.next;
-			}
-			System.out.println();	
-			}*/
+
 		}
 		
 	//æ·±åº¦ä¼˜å…ˆæ�œç´¢åˆ¤æ–­å…³é”®ç‚¹
-	public Map<Character,Integer> DFSSearch(char from,char to)throws Exception{
-		char w = to;
+	public Map<Integer,Integer> DFSSearch(int from,int to)throws Exception{
+		int w = to;
 		int NodeIFrom,NodeITo;
 		for(NodeIFrom=0;NodeIFrom<V.length;NodeIFrom++){ //foræŸ¥æ‰¾wä¸ŽVä¸­å¯¹åº”èŠ‚ç‚¹åº�å�·NodeIFrom
 //			System.out.println(V[NodeIFrom].from);
@@ -50,12 +41,12 @@ public class ArticulationNode {
 	
 	//	for(char t = A.to;A!=null;t = A.next.to){ 
 		while(A!=null){
-			char t=A.to;
+			int t=A.to;
 		
 			for(NodeITo=0;NodeITo<V.length;NodeITo++){
 				if(V[NodeITo].from == t)break;
 				}
-				if(ord[NodeITo]==-1){
+				if(NodeITo<V.length&&ord[NodeITo]==-1){
 					DFSSearch(V[NodeIFrom].from,V[NodeITo].from);
 					if(low[NodeIFrom] > low[NodeITo]) low[NodeIFrom] = low[NodeITo];
 					if(low[NodeITo] ==ord[NodeITo]){
@@ -76,7 +67,7 @@ public class ArticulationNode {
 				}
 //				else if(t!=V[NodeIFrom].from){
 				else if(t!=from){
-					if(low[NodeIFrom]>ord[NodeITo]) 
+					if(NodeITo<V.length&&NodeIFrom<V.length&&low[NodeIFrom]>ord[NodeITo]) 
 						low[NodeIFrom]=ord[NodeITo];
 					}
 				A=A.next;
@@ -84,9 +75,9 @@ public class ArticulationNode {
 		return Articulation;
 	}
 	
-	public List<Map.Entry<Character,Integer>> IArticulationNode(List<Character> Zr) throws Exception{
+	public List<Map.Entry<Integer,Integer>> IArticulationNode(List<Integer> Zr) throws Exception{
 		
-		Map<Character,Integer> ANode = new HashMap<Character,Integer>();
+		Map<Integer,Integer> ANode = new HashMap<Integer,Integer>();
 		
 		for(int i=0;i<V.length;i++){
 			if(ord[i]==-1)
@@ -111,8 +102,8 @@ public class ArticulationNode {
 		System.out.println();*/
 		
 		//ä¿�ç•™æ—¢åœ¨resultä¸­çš„èŠ‚ç‚¹å�ˆåœ¨Zrä¸­çš„èŠ‚ç‚¹
-		Set<Map.Entry<Character, Integer>> resultEntry = result.entrySet();  //mapçš„entrySetæ–¹æ³•
-		for(Map.Entry<Character, Integer> rentry:resultEntry){
+		Set<Map.Entry<Integer, Integer>> resultEntry = result.entrySet();  //mapçš„entrySetæ–¹æ³•
+		for(Map.Entry<Integer, Integer> rentry:resultEntry){
 			for(int j=0;j<Zr.size();j++){
 				if(rentry.getKey()==Zr.get(j))
 					ANode.put(rentry.getKey(),rentry.getValue());
@@ -120,11 +111,11 @@ public class ArticulationNode {
 		}
 		//hashmapæ— æ³•æ·»åŠ ç›¸å�Œçš„key,å¦‚æžœkeyç›¸å�Œåˆ™è¦†ç›–ä¹‹å‰�çš„value.
 		//æŒ‰valueæŽ’åº� ä»Žå¤§åˆ°å°�.
-		List<Map.Entry<Character,Integer>> resultNodes= 
-			new ArrayList<Map.Entry<Character,Integer>>(ANode.entrySet()); 
+		List<Map.Entry<Integer,Integer>> resultNodes= 
+			new ArrayList<Map.Entry<Integer,Integer>>(ANode.entrySet()); 
 		
-		Collections.sort(resultNodes, new Comparator<Map.Entry<Character, Integer>>() {   
-		    public int compare(Map.Entry<Character, Integer> o1, Map.Entry<Character, Integer> o2) {      
+		Collections.sort(resultNodes, new Comparator<Map.Entry<Integer, Integer>>() {   
+		    public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {      
 		        //return (o2.getValue() - o1.getValue()); 
 		        return (o2.getValue().compareTo(o1.getValue()));
 		    }
@@ -135,7 +126,7 @@ public class ArticulationNode {
 		
 	}
 	//åŽ»æŽ‰æŸ�èŠ‚ç‚¹è®¡ç®—å›¾ä¸­ç‚¹æ•°
-	public int cacluWeight(char Node)throws Exception{
+	public int cacluWeight(int Node)throws Exception{
 		Draw G = new Draw();
 		VNode[] vv= G.DrawG();
 		int len=vv.length;
@@ -180,9 +171,9 @@ public class ArticulationNode {
 		return Weight;
 	}
 	   public int BFSearch(VNode[] v){ //é˜Ÿåˆ—å¹¿åº¦ä¼˜å…ˆæ�œç´¢
-		   	 char cc;
+		   	 int cc;
 		   	 int noIsolate=0;
-		     Queue<Character> que=new LinkedList<Character>();    
+		     Queue<Integer> que=new LinkedList<Integer>();    
 		     List<Integer> list = new ArrayList<Integer>();
 		     for(int t=0;t<v.length;t++){
 		    	 list.add(t,0);

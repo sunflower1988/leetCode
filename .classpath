@@ -2,5 +2,9 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/i312902/Private/eclipse-java-helios-SR1-win32-x86_64/eclipse/plugins/org.eclipse.core.runtime_3.6.0.v20100505.jar"/>
+	<classpathentry kind="lib" path="C:/Users/i312902/Private/eclipse-java-helios-SR1-win32-x86_64/eclipse/plugins/org.eclipse.jface_3.6.1.M20100825-0800.jar"/>
+	<classpathentry kind="lib" path="C:/Users/i312902/Private/eclipse-java-helios-SR1-win32-x86_64/eclipse/plugins/org.eclipse.swt_3.6.1.v3655c.jar"/>
+	<classpathentry kind="lib" path="C:/Users/i312902/Private/eclipse-java-helios-SR1-win32-x86_64/eclipse/plugins/org.eclipse.ui.workbench_3.6.1.M20100826-1330.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -10,10 +10,10 @@ import java.util.*;
 //ä¿®æ”¹è¡¨
 public class CriticalNode {
 	VNode[] vn;
-	public List<Map.Entry<Character,Integer>> ICriticalNode(VNode[] vv,List<Character> Zr,List<Map.Entry<Character,Integer>> ArNode,List<Map.Entry<Character,Integer>> PiNode) throws Exception{
+	public List<Map.Entry<Integer,Integer>> ICriticalNode(VNode[] vv,List<Integer> Zr,List<Map.Entry<Integer,Integer>> ArNode,List<Map.Entry<Integer,Integer>> PiNode) throws Exception{
 		//ç­›é€‰æ—¢ä¸�åœ¨ArNodeå�ˆä¸�åœ¨PiNodeä¸­çš„èŠ‚ç‚¹ä½†åœ¨Zrä¸­çš„èŠ‚ç‚¹
 		List<Integer> list = new ArrayList<Integer>();
-		Map<Character,Integer> Critical = new HashMap<Character,Integer>();
+		Map<Integer,Integer> Critical = new HashMap<Integer,Integer>();
 		int sum=0;
 		for(int i=0;i<ArNode.size();i++){
 			for(int j=0;j<Zr.size();j++){
@@ -92,11 +92,11 @@ public class CriticalNode {
 		}
 	
 		//æ ¹æ�®valueæŽ’åº�
-		List<Map.Entry<Character,Integer>> resultNodes= 
-			new ArrayList<Map.Entry<Character,Integer>>(Critical.entrySet()); 
+		List<Map.Entry<Integer,Integer>> resultNodes= 
+			new ArrayList<Map.Entry<Integer,Integer>>(Critical.entrySet()); 
 		
-		Collections.sort(resultNodes, new Comparator<Map.Entry<Character, Integer>>() {   
-		    public int compare(Map.Entry<Character, Integer> o1, Map.Entry<Character, Integer> o2) {      
+		Collections.sort(resultNodes, new Comparator<Map.Entry<Integer, Integer>>() {   
+		    public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {      
 		        //return (o2.getValue() - o1.getValue()); 
 		        return (o1.getValue().compareTo(o2.getValue()));
 		    }

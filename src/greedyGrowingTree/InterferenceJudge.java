@@ -1,9 +1,9 @@
 package greedyGrowingTree;
 import java.util.*;
 public class InterferenceJudge {
-	char p;
+	int p;
 	VNode[] v;
-	public boolean IInterferenceJudge(List<Character> Sr,List<Character> Dr,char z,char d) throws Exception{
+	public boolean IInterferenceJudge(List<Integer> Sr,List<Integer> Dr,int z,int d) throws Exception{
 		
 		for(int i=0;i<Sr.size();i++){
 		/*	for(int m=0;m<Dr.size();m++){   //Sr��parents
@@ -20,7 +20,7 @@ public class InterferenceJudge {
 		}
 			return false;
 		}
-	public boolean HasEdge(char p,char z) throws Exception{
+	public boolean HasEdge(int p,int z) throws Exception{
 		Draw G = new Draw();
 		v= G.DrawG(); 
 		for(int i=0;i<v.length;i++){

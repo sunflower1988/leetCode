@@ -3,16 +3,16 @@ import java.util.*;
 //ç»™æ‰€æœ‰ç»“ç‚¹åˆ†å±‚æ ‡å�·
 public class BFS {
 	VNode[] v;
-	List<Character> zr=new ArrayList<Character>();
-	List<Character> arNode = new ArrayList<Character>();
+	List<Integer> zr=new ArrayList<Integer>();
+	List<Integer> arNode = new ArrayList<Integer>();
 	
 	BFS(VNode[] v){
 		this.v=v;
 	}
 	   public List<Integer> BFSearch(){ //é˜Ÿåˆ—å¹¿åº¦ä¼˜å…ˆæ�œç´¢
-		   	 char cc;
+		   	 int cc;
 		   	 
-		     Queue<Character> que=new LinkedList<Character>();    
+		     Queue<Integer> que=new LinkedList<Integer>(); 
 		     List<Integer> list = new ArrayList<Integer>();
 		     for(int t=0;t<v.length;t++){
 		    	 list.add(t,0);
@@ -36,7 +36,7 @@ public class BFS {
 				    	 if(v[j].from==e.to)break;
 				     }
 		  
-		          if((!v[j].visit)&&(!que.contains(e.to))){
+		          if((j<v.length&&!v[j].visit)&&(!que.contains(e.to))){
 		        	  que.add(e.to);
 		        	  int k = list.get(i)+1;
 		        	  list.set(j,k);
